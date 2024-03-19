@@ -1,26 +1,24 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createRoot } from "react-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./index.css";
 
 // Import your components
 import App from "./App";
+import AdminLogin from "./components/Admin/AdminLogin";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />
-  },
-  {
-    path: "/admin",
-    element: <AdminDashboard />
-  }
-]);
+const router = (
+  <Router>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route path="/admin-dashboard" element={<AdminDashboard />} />
+    </Routes>
+  </Router>
+);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+createRoot(document.getElementById("root")).render(
+  <React.StrictMode>{router}</React.StrictMode>
 );
