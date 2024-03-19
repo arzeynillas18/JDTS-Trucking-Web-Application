@@ -3,8 +3,7 @@ import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import ResponsiveMenu from "./ResponsiveMenu";
 import Modal from "../Modal/Modal";
-import Logo from "../../assets/jdtslogo.png"; 
-import LoginModal from "../Modal/LoginModal";
+import Logo from "../../assets/jdtslogo.png";
 
 export const Navlinks = [
   {
@@ -22,24 +21,14 @@ export const Navlinks = [
     name: "TRUCKS",
     link: "/#carlist-section",
   },
-  
 ];
 
 const Navbar = ({ theme, setTheme }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showBookingModal, setShowBookingModal] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
-  };
-
-  const toggleBookingModal = () => {
-    setShowBookingModal(!showBookingModal);
-  };
-
-  const toggleLoginModal = () => {
-    setShowLoginModal(!showLoginModal);
   };
 
   const openModal = () => {
@@ -88,17 +77,11 @@ const Navbar = ({ theme, setTheme }) => {
                 </a>
               </li>
             ))}
-            <li>
-              <a href="#" onClick={toggleLoginModal} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                LOG IN / SIGN UP
-              </a>
-            </li>
           </ul>
         </div>
       </div>
       <ResponsiveMenu showMenu={showMenu} />
       <Modal showModal={showBookingModal} setShowModal={setShowBookingModal} />
-      {showLoginModal && <LoginModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />}
     </nav>
   );
 };

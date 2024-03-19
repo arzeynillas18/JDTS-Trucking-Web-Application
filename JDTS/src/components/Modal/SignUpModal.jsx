@@ -76,7 +76,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal }) => {
                     value=""
                   />
                   <label htmlFor="password" className="sr-only">
-                    Password
+                    Password=
                   </label>
                   <input
                     name="password"
@@ -85,7 +85,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal }) => {
                     required=""
                     className="mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
                     placeholder="Password"
-                    value=""
+                     value=""
                   />
                   <button
                     type="submit"
