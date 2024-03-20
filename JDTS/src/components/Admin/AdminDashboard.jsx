@@ -1,25 +1,25 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 const AdminDashboard = () => {
-  const history = useHistory();
-
-  const handleLogout = () => {
-    // Perform logout actions, e.g., clear session, redirect to login page
-    history.push("/admin-login"); // Redirect to login page after logout
-  };
-
   return (
-    <div className="h-screen flex bg-gray-100 justify-center items-center">
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-semibold mb-4">Admin Dashboard</h1>
-        <p>Welcome to the admin dashboard!</p>
-        <button
-          className="bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-md px-4 py-2 mt-4"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+    <div className="h-screen flex flex-col justify-center items-center bg-gray-100">
+      <div className="rounded-lg shadow-md p-8 bg-white w-full max-w-xl">
+        <h1 className="text-3xl font-semibold mb-6">Welcome, Admin!</h1>
+        <div className="mt-6">
+          <h2 className="text-xl font-semibold">Recent Activity</h2>
+          <ul className="mt-2">
+            <li>Logged in at 10:00 AM</li>
+            <li>Updated user settings</li>
+            <li>Viewed analytics report</li>
+          </ul>
+        </div>
+        <div className="mt-6">
+          <h2 className="text-xl font-semibold">Tasks</h2>
+          <ul className="mt-2">
+            <li>Review user feedback</li>
+            <li>Complete monthly report</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
