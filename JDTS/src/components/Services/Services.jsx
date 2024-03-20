@@ -10,7 +10,7 @@ const skillsData = [
       <FaCameraRetro className="text-5xl text-primary group-hover:text-black duration-300" />
     ),
     link: "#",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    description: "Offers the best prices for truck services and rentals. Our commitment to affordability ensures that you get top-notch service without breaking the bank. Choose us for cost-effective solutions tailored to your needs.",
     aosDelay: "0",
   },
   {
@@ -19,16 +19,17 @@ const skillsData = [
       <GiNotebook className="text-5xl text-primary group-hover:text-black duration-300" />
     ),
     link: "#",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    description: " Our efficient operations prioritize your safety and ensure timely deliveries, making us your reliable choice for all your transportation needs.",
     aosDelay: "500",
   },
   {
-    name: "Experience Drivers",
+    name: "Experienced Drivers",
     icon: (
       <SlNote className="text-5xl text-primary group-hover:text-black duration-500" />
     ),
     link: "#",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    description: 
+    " Our company's expertise ensures a smooth and reliable transport experience, providing you with peace of mind knowing your goods are in capable hands.",
     aosDelay: "1000",
   },
 ];
@@ -58,12 +59,7 @@ const Services = () => {
                 <div className="grid place-items-center">{skill.icon}</div>
                 <h1 className="text-2xl font-bold">{skill.name}</h1>
                 <p>{skill.description}</p>
-                <a
-                  href={skill.link}
-                  className="inline-block text-lg font-semibold py-3 text-primary group-hover:text-black duration-300"
-                >
-                  Learn more
-                </a>
+                
               </div>
             ))}
           </div>

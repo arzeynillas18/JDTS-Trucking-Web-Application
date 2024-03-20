@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const BookingModal = ({ showModal, setShowModal }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -54,13 +55,34 @@ const BookingModal = ({ showModal, setShowModal }) => {
   return (
     showModal && (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase">
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden w-96">
+          <div className="flex justify-end px-4 pt-2">
+            <button
+              className="text-gray-600 hover:text-gray-800 focus:outline-none"
+              onClick={() => setShowModal(false)}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+                    <div className="text-2xl py-4 px-6 text-red-500 text-center font-bold uppercase">
             Book an Appointment
           </div>
           <div className="h-96 overflow-y-auto">
             <form className="py-4 px-6" onSubmit={handleSubmit}>
-              <div className="mb-4">
+            <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
                   Name
                 </label>
@@ -118,7 +140,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2" htmlFor="time">
-                    Time
+                    Time for Pick-up
                   </label>
                   <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -143,10 +165,12 @@ const BookingModal = ({ showModal, setShowModal }) => {
                   required
                 >
                   <option value="">Select a service</option>
-                  <option value="haircut">deliver</option>
-                  <option value="coloring">verdeli</option>
-                  <option value="styling">apuch</option>
-                  <option value="facial">ka nito</option>
+                  <option value="trucking">Trucking Service</option>
+                  <option value="productstransfer">Products/Materials Transfer</option>
+                  <option value="hauling">Hauling</option>
+                  <option value="garbage">Garbage/Debris</option>
+                  <option value="housetransfer">Lipat Bahay/Office/Warehouse Transfer</option>
+                  <option value="others">others type in Message</option>
                 </select>
               </div>
               <div className="mb-4">
@@ -171,14 +195,6 @@ const BookingModal = ({ showModal, setShowModal }) => {
                 </button>
               </div>
             </form>
-          </div>
-          <div className="flex justify-center">
-            <button
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center focus:outline-none focus:shadow-outline"
-              onClick={() => setShowModal(false)}
-            >
-              Close
-            </button>
           </div>
         </div>
       </div>

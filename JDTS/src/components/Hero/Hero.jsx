@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from "react";
-
-import Modal from "../Modal/Modal";
 import truckpng from "../../assets/truck.png";
 import truck from "../../assets/banner-car.png";
 import AOS from "aos";
 
 const Hero = ({ theme }) => {
-  const [showModal, setShowModal] = useState(false);
-
   useEffect(() => {
     AOS.refresh();
   });
-
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   return (
     <>
@@ -56,21 +44,17 @@ const Hero = ({ theme }) => {
               </h1>
 
               <div className="flex justify-center">
-                      <button 
-        onClick={openModal}
-        data-aos="fade-up"
-        data-aos-delay="1500" className="px-8 py-2 border border-black bg-transparent text-black relative group transition duration-200">
-            <div className="absolute -bottom-2 -right-2 bg-red-700 h-full w-full -z-10 group-hover:bottom-0 group-hover:right-0 transition-all duration-200" />
-            <span className="relative font-bold group-hover:text-yellow-500">
-              BOOK NOW!
-            </span>
-          </button>
+                <a href="#about-section" className="px-8 py-2 border border-black bg-red-700 text-white relative group transition duration-200">
+                  <div className="absolute -bottom-2 -right-2 bg-red-700 h-full w-full -z-10 group-hover:bottom-0 group-hover:right-0 transition-all duration-200" />
+                  <span className="relative font-bold group-hover:text-yellow-500">
+                    GET STARTED
+                  </span>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Modal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };

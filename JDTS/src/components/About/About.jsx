@@ -22,13 +22,19 @@ const About = () => {
                 About us
               </h1>
               <p data-aos="fade-up" className="leading-8 tracking-wide">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Aspernatur, magnam! Tenetur odio quo et maxime?
+               Where Excellence Meets Affordability – Our Sole Mission is Providing Top-notch Service at a Price that Pleases!
               </p>
-              <p data-aos="fade-up">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi,
-                tempora.
-              </p>
+              <p data-aos="fade-up" className="text-3xl sm:text-2xl font-bold font-serif"> Transport Service for:</p>
+              <ul data-aos="fade-up" className="list-disc ml-6">
+                <li> Debris</li>
+                <li> Garbage</li>
+                <li> Lipat Bahay/Condo Transfer</li>
+                <li> Office/Warehouse Transfer</li>
+                <li> Hauling</li>
+                <li> Trucking Service</li>
+                <li> Catering Food Transport</li>
+                <li> Products/Materials Transfer</li>
+              </ul>
             </div>
           </div>
         </div>
