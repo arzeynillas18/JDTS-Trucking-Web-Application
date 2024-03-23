@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../Firebase";
+import SuccessModal from "./SuccessModal";
+import emailjs from 'emailjs-com';
+
 
 
 const BookingModal = ({ showModal, setShowModal }) => {
@@ -9,6 +14,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
   const [appointmentTime, setAppointmentTime] = useState("");
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
+  const [bookingSuccess, setBookingSuccess] = useState(false);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -37,65 +43,90 @@ const BookingModal = ({ showModal, setShowModal }) => {
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle the submission of the appointment details
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Phone:", phone);
-    console.log("Appointment Date:", appointmentDate);
-    console.log("Appointment Time:", appointmentTime);
-    console.log("Service:", service);
-    console.log("Message:", message);
-    // Close the modal after submission
-    setShowModal(false);
+  const sendEmail = (name, email, phone, appointmentDate, appointmentTime, service, message) => {
+    const templateParams = {
+      from_name: name,
+      email: email,
+      phone: phone,
+      appointmentDate: appointmentDate,
+      appointmentTime: appointmentTime,
+      service: service,
+      message: message,
+    };
+  
+    emailjs.send('service_bz6qfcf', 'template_9yyyvgk', templateParams, 'lPZkjiXUV9H-IyK0P')
+      .then((response) => {
+        console.log('Email successfully sent!', response.status, response.text);
+      })
+      .catch((error) => {
+        console.error('Email sending failed:', error);
+      });
   };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const docRef = await addDoc(collection(db, 'form'), {
+        name,
+        email,
+        phone,
+        appointmentDate,
+        appointmentTime,
+        service,
+        message,
+      });
+      console.log('Document written with ID: ', docRef.id);
+      setBookingSuccess(true);
+      sendEmail(name, email, phone, appointmentDate, appointmentTime, service, message);
+      // Close the modal after submission
+      setShowModal(false);
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
+  };
+  
 
   return (
-    showModal && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden w-96">
-          <div className="flex justify-end px-4 pt-2">
-            <button
-              className="text-gray-600 hover:text-gray-800 focus:outline-none"
-              onClick={() => setShowModal(false)}
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+    <>
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden w-96">
+            <div className="flex justify-end px-4 pt-2">
+              <button
+                className="text-gray-600 hover:text-gray-800 focus:outline-none"
+                onClick={() => setShowModal(false)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-                    <div className="text-2xl py-4 px-6 text-red-500 text-center font-bold uppercase">
-            Book an Appointment
-          </div>
-          <div className="h-96 overflow-y-auto">
-            <form className="py-4 px-6" onSubmit={handleSubmit}>
-            <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-                  Name
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={handleNameChange}
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="text-2xl py-4 px-6 text-red-500 text-center font-bold uppercase">
+              Book an Appointment
+            </div>
+            <div className="h-96 overflow-y-auto">
+              <form className="py-4 px-6" onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+                    Name
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={handleNameChange}
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+                
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
                   Email
@@ -127,7 +158,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
-                    Date
+                    Date for Pick up
                   </label>
                   <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -170,7 +201,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
                   <option value="hauling">Hauling</option>
                   <option value="garbage">Garbage/Debris</option>
                   <option value="housetransfer">Lipat Bahay/Office/Warehouse Transfer</option>
-                  <option value="others">others type in Message</option>
+                  <option value="others">Others type in Message</option>
                 </select>
               </div>
               <div className="mb-4">
@@ -178,7 +209,8 @@ const BookingModal = ({ showModal, setShowModal }) => {
                   Message
                 </label>
                 <textarea
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+                  focus:outline-none focus:shadow-outline"
                   id="message"
                   rows="4"
                   value={message}
@@ -186,19 +218,21 @@ const BookingModal = ({ showModal, setShowModal }) => {
                   placeholder="Enter any additional information"
                 ></textarea>
               </div>
-              <div className="flex items-center justify-center mb-4">
-                <button
-                  className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-                  type="submit"
-                >
-                  Book Appointment
-                </button>
-              </div>
-            </form>
+                <div className="flex items-center justify-center mb-4">
+                  <button
+                    className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    Book Appointment
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )}
+      {bookingSuccess && <SuccessModal />}
+    </>
   );
 };
 
