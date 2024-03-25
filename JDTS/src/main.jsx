@@ -1,13 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-
+import { getAuth } from "firebase/auth";
 import "./index.css";
-
-// Import your components
 import App from "./App";
 import AdminLogin from "./components/Admin/AdminLogin";
 import AdminDashboard from "./components/Admin/AdminDashboard";
@@ -21,12 +18,13 @@ const firebaseConfig = {
   messagingSenderId: "880440482962",
   appId: "1:880440482962:web:345ccb4a70741ffe7c1a4b",
   measurementId: "G-0FPF4HHTYB",
-  databaseURL: "https://jdts-9f4da-default-rtdb.firebaseio.com", // Optional, only needed if you are using the Realtime Database
+  databaseURL: "https://jdts-9f4da-default-rtdb.firebaseio.com", 
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 const router = (
   <Router>

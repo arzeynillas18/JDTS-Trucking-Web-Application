@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Firebase";
 
@@ -61,6 +60,7 @@ const AdminDashboard = () => {
                     <th className="px-4 py-2">Email</th>
                     <th className="px-4 py-2">Phone</th>
                     <th className="px-4 py-2">Service</th>
+                    <th className="px-4 py-2">Truck</th>
                     <th className="px-4 py-2">Message</th>
                   </tr>
                 </thead>
@@ -73,6 +73,7 @@ const AdminDashboard = () => {
                       <td className="border px-4 py-2">{appointment.email}</td>
                       <td className="border px-4 py-2">{appointment.phone}</td>
                       <td className="border px-4 py-2">{appointment.service}</td>
+                      <td className="border px-4 py-2">{appointment.truck}</td>
                       <td className="border px-4 py-2">{appointment.message}</td>
                     </tr>
                   ))}
@@ -81,7 +82,6 @@ const AdminDashboard = () => {
             </div>
           ))}
         </div>
-  
       </div>
     </div>
   );

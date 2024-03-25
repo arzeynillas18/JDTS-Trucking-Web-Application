@@ -1,10 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
-import SuccessModal from "./SuccessModal";
+import SuccessModal from "../Modal/SuccessModal";
 import emailjs from 'emailjs-com';
-
-
 
 const BookingModal = ({ showModal, setShowModal }) => {
   const [name, setName] = useState("");
@@ -13,6 +11,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
   const [appointmentDate, setAppointmentDate] = useState("");
   const [appointmentTime, setAppointmentTime] = useState("");
   const [service, setService] = useState("");
+  const [truck, setTruck] = useState(""); // New state for selected truck
   const [message, setMessage] = useState("");
   const [bookingSuccess, setBookingSuccess] = useState(false);
 
@@ -40,17 +39,23 @@ const BookingModal = ({ showModal, setShowModal }) => {
     setService(e.target.value);
   };
 
+  const handleTruckChange = (e) => {
+    setTruck(e.target.value);
+  };
+
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   };
-  const sendEmail = (name, email, phone, appointmentDate, appointmentTime, service, message) => {
+
+  const sendEmail = (name, email, phone, appointmentDate, appointmentTime, service, truck, message) => {
     const templateParams = {
-      from_name: name,
+      name: name,
       email: email,
       phone: phone,
       appointmentDate: appointmentDate,
       appointmentTime: appointmentTime,
       service: service,
+      truck: truck,
       message: message,
     };
   
@@ -73,11 +78,12 @@ const BookingModal = ({ showModal, setShowModal }) => {
         appointmentDate,
         appointmentTime,
         service,
+        truck, // Include truck in the submitted data
         message,
       });
       console.log('Document written with ID: ', docRef.id);
       setBookingSuccess(true);
-      sendEmail(name, email, phone, appointmentDate, appointmentTime, service, message);
+      sendEmail(name, email, phone, appointmentDate, appointmentTime, service, truck, message);
       // Close the modal after submission
       setShowModal(false);
     } catch (error) {
@@ -129,7 +135,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
                 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-                  Email
+                  Email 
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -176,7 +182,8 @@ const BookingModal = ({ showModal, setShowModal }) => {
                   <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="time"
-                    type="time"
+                    type
+                    ="time"
                     value={appointmentTime}
                     onChange={handleTimeChange}
                     required
@@ -205,6 +212,25 @@ const BookingModal = ({ showModal, setShowModal }) => {
                 </select>
               </div>
               <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="truck">
+                  Select a Truck
+                </label>
+                <select
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="truck"
+                  name="truck"
+                  value={truck}
+                  onChange={handleTruckChange}
+                  required
+                >
+                  <option value="">Select a truck</option>
+                  <option value="truck1">Truck 1</option>
+                  <option value="truck2">Truck 2</option>
+                  <option value="truck3">Truck 3</option>
+                  {/* Add more truck options as needed */}
+                </select>
+              </div>
+              <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
                   Message
                 </label>
@@ -218,18 +244,18 @@ const BookingModal = ({ showModal, setShowModal }) => {
                   placeholder="Enter any additional information"
                 ></textarea>
               </div>
-                <div className="flex items-center justify-center mb-4">
-                  <button
-                    className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-                    type="submit"
-                  >
-                    Book Appointment
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div className="flex items-center justify-center mb-4">
+                <button
+                  className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Book Appointment
+                </button>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
       )}
       {bookingSuccess && <SuccessModal />}
     </>

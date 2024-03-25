@@ -44,13 +44,17 @@ const Hero = ({ theme }) => {
               </h1>
 
               <div className="flex justify-center">
-                <a href="#about-section" className="px-8 py-2 border border-black bg-red-700 text-white relative group transition duration-200">
-                  <div className="absolute -bottom-2 -right-2 bg-red-700 h-full w-full -z-10 group-hover:bottom-0 group-hover:right-0 transition-all duration-200" />
-                  <span className="relative font-bold group-hover:text-yellow-500">
-                    GET STARTED
-                  </span>
-                </a>
-              </div>
+  <a
+    href="#about-section"
+    className="px-8 py-2 border border-black bg-red-700 text-white relative group transition duration-200"
+    data-aos="fade-up"  
+  >
+    <div className="absolute -bottom-2 -right-2 bg-red-700 h-full w-full -z-10 group-hover:bottom-0 group-hover:right-0 transition-all duration-200" />
+    <span className="relative font-bold group-hover:text-yellow-500">
+      GET STARTED
+    </span>
+  </a>
+</div>
             </div>
           </div>
         </div>
