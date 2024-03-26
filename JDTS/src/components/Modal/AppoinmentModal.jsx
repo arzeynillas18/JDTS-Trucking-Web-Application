@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
@@ -90,13 +91,12 @@ const BookingModal = ({ showModal, setShowModal }) => {
       console.error('Error adding document: ', error);
     }
   };
-  
 
   return (
     <>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden w-96">
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden w-[calc(60%-20px)]">
             <div className="flex justify-end px-4 pt-2">
               <button
                 className="text-gray-600 hover:text-gray-800 focus:outline-none"
@@ -132,130 +132,129 @@ const BookingModal = ({ showModal, setShowModal }) => {
                     required
                   />
                 </div>
-                
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-                  Email 
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="phone">
-                  Phone Number
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="phone"
-                  type="tel"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  placeholder="Enter your phone number"
-                  required
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
-                    Date for Pick up
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+                    Email 
                   </label>
                   <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="date"
-                    type="date"
-                    value={appointmentDate}
-                    onChange={handleDateChange}
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    placeholder="Enter your email"
                     required
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2" htmlFor="time">
-                    Time for Pick-up
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="phone">
+                    Phone Number
                   </label>
                   <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="time"
-                    type
-                    ="time"
-                    value={appointmentTime}
-                    onChange={handleTimeChange}
+                    id="phone"
+                    type="tel"
+                    value={phone}
+                    onChange={handlePhoneChange}
+                    placeholder="Enter your phone number"
                     required
                   />
                 </div>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="service">
-                  Service
-                </label>
-                <select
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="service"
-                  name="service"
-                  value={service}
-                  onChange={handleServiceChange}
-                  required
-                >
-                  <option value="">Select a service</option>
-                  <option value="trucking">Trucking Service</option>
-                  <option value="productstransfer">Products/Materials Transfer</option>
-                  <option value="hauling">Hauling</option>
-                  <option value="garbage">Garbage/Debris</option>
-                  <option value="housetransfer">Lipat Bahay/Office/Warehouse Transfer</option>
-                  <option value="others">Others type in Message</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="truck">
-                  Select a Truck
-                </label>
-                <select
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="truck"
-                  name="truck"
-                  value={truck}
-                  onChange={handleTruckChange}
-                  required
-                >
-                  <option value="">Select a truck</option>
-                  <option value="truck1">Truck 1</option>
-                  <option value="truck2">Truck 2</option>
-                  <option value="truck3">Truck 3</option>
-                  {/* Add more truck options as needed */}
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
-                  Message
-                </label>
-                <textarea
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
-                  focus:outline-none focus:shadow-outline"
-                  id="message"
-                  rows="4"
-                  value={message}
-                  onChange={handleMessageChange}
-                  placeholder="Enter any additional information"
-                ></textarea>
-              </div>
-              <div className="flex items-center justify-center mb-4">
-                <button
-                  className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-                  type="submit"
-                >
-                  Book Appointment
-                </button>
-              </div>
-            </form>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="mb-4">
+                    <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
+                      Date for Pick up
+                    </label>
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="date"
+                      type="date"
+                      value={appointmentDate}
+                      onChange={handleDateChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-gray-700 font-bold mb-2" htmlFor="time">
+                      Time for Pick-up
+                    </label>
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="time"
+                      type
+                      ="time"
+                      value={appointmentTime}
+                      onChange={handleTimeChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="service">
+                    Service
+                  </label>
+                  <select
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="service"
+                    name="service"
+                    value={service}
+                    onChange={handleServiceChange}
+                    required
+                  >
+                    <option value="">Select a service</option>
+                    <option value="trucking">Trucking Service</option>
+                    <option value="productstransfer">Products/Materials Transfer</option>
+                    <option value="hauling">Hauling</option>
+                    <option value="garbage">Garbage/Debris</option>
+                    <option value="housetransfer">Lipat Bahay/Office/Warehouse Transfer</option>
+                    <option value="others">Others type in Message</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="truck">
+                    Select a Truck
+                  </label>
+                  <select
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="truck"
+                    name="truck"
+                    value={truck}
+                    onChange={handleTruckChange}
+                    required
+                  >
+                    <option value="">Select a truck</option>
+                    <option value="truck1">Truck 1</option>
+                    <option value="truck2">Truck 2</option>
+                    <option value="truck3">Truck 3</option>
+                    {/* Add more truck options as needed */}
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
+                    Message
+                  </label>
+                  <textarea
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+                    focus:outline-none focus:shadow-outline"
+                    id="message"
+                    rows="4"
+                    value={message}
+                    onChange={handleMessageChange}
+                    placeholder="Enter any additional information"
+                  ></textarea>
+                </div>
+                <div className="flex items-center justify-center mb-4">
+                  <button
+                    className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    Book Appointment
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
       )}
       {bookingSuccess && <SuccessModal />}
     </>
@@ -263,3 +262,4 @@ const BookingModal = ({ showModal, setShowModal }) => {
 };
 
 export default BookingModal;
+
