@@ -4,6 +4,7 @@ import { db } from "../../Firebase";
 
 const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const getAppointments = async () => {
@@ -34,6 +35,11 @@ const AdminDashboard = () => {
     groupedAppointments[appointment.appointmentDate].push(appointment);
   });
 
+  // Filter appointments based on search query
+  const filteredAppointments = appointments.filter((appointment) =>
+    appointment.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="h-screen flex flex-col justify-center items-center bg-gray-100">
       <div className="rounded-lg shadow-md p-8 bg-white w-full max-w-screen-xl overflow-x-auto">
@@ -47,6 +53,13 @@ const AdminDashboard = () => {
           </button>
         </div>
         <div className="mt-6">
+          <input
+            type="text"
+            placeholder="Search by name..."
+            className="border px-4 py-2 mb-4"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
           <h2 className="text-xl font-semibold">Bookings Appointment History</h2>
           {Object.keys(groupedAppointments).map((date) => (
             <div key={date}>
@@ -65,7 +78,7 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {groupedAppointments[date].map((appointment) => (
+                  {filteredAppointments.map((appointment) => (
                     <tr key={appointment.id}>
                       <td className="border px-4 py-2">{appointment.appointmentDate}</td>
                       <td className="border px-4 py-2">{appointment.appointmentTime}</td>

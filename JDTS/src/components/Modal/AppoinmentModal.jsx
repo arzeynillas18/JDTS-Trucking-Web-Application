@@ -223,9 +223,9 @@ const BookingModal = ({ showModal, setShowModal }) => {
                     required
                   >
                     <option value="">Select a truck</option>
-                    <option value="truck1">Truck 1</option>
-                    <option value="truck2">Truck 2</option>
-                    <option value="truck3">Truck 3</option>
+                    <option value="truck1">Elf cab</option>
+                    <option value="truck2">Multicab</option>
+                    <option value="truck3">Canter</option>
                     {/* Add more truck options as needed */}
                   </select>
                 </div>

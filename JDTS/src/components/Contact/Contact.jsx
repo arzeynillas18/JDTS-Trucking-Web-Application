@@ -24,8 +24,7 @@ const Contact = () => {
                 Let's collaborate on your upcoming Truck rental venture
               </h1>
               <p className="text-gray-400">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Exercitationem necessitatibus quasi et vel,{" "}
+              "In every venture, we guarantee to deliver excellence and exceed your expectations.",{" "}
               </p>
             </div>
             <div className="sm:grid sm:place-items-center">
