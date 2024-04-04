@@ -1,5 +1,16 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLocationArrow, FaMobileAlt } from "react-icons/fa";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
+
+const mapContainerStyle = {
+  width: "100%",
+  height: "100%",
+};
+
+const center = {
+  lat: 40.697149398867746,
+  lng: -74.25908998630975,
+};
 
 const Footer = () => {
   return (
@@ -23,26 +34,28 @@ const Footer = () => {
               <FaMobileAlt />
               <p>+91 123456789</p>
             </div>
-            <div className="flex items-center gap-3 mt-6">
-              <a href="#">
-                <FaInstagram className="text-3xl hover:text-primary duration-300" />
-              </a>
-              <a href="#">
-                <FaFacebook className="text-3xl hover:text-primary duration-300" />
-              </a>
-            </div>
+                    <div className="flex items-center gap-3 mt-6">
+          <a href="https://www.instagram.com/">
+            <FaInstagram className="text-3xl hover:text-primary duration-300" />
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61554131270049">
+            <FaFacebook className="text-3xl hover:text-primary duration-300" />
+          </a>
+        </div>
+
           </div>
           <div className="md:col-span-1 py-8 px-4" style={{ marginLeft: '-30px' }}>
             <p className="text-sm text-gray-500 mb-3">
               Our location on the map
             </p>
-            <div className="relative" style={{ width: '350px', height: '240px' }}>
-              <iframe
-                className="absolute top-0 left-0 w-full h-full"
-                loading="lazy"
-                allowfullscreen
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387168.6978227105!2d-74.25908998630975!3d40.697149398867746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1648850842205!5m2!1sen!2sbd"
-              ></iframe>
+            <div style={{ width: '350px', height: '240px' }}>
+              <LoadScript googleMapsApiKey="YOUR_API_KEY">
+                <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  center={center}
+                  zoom={15}
+                ></GoogleMap>
+              </LoadScript>
             </div>
           </div>
         </div>
