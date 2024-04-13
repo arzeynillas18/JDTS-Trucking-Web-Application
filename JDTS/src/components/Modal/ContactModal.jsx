@@ -124,7 +124,7 @@ const ContactModal = ({ showModal, closeModal }) => {
           </div>
         </div>
       </div>
-      {showSuccessModal && <SuccessContactModal closeModal={handleSuccessModalClose} />} // Render the success modal if showSuccessModal is true
+      {showSuccessModal && <SuccessContactModal closeModal={handleSuccessModalClose} />} 
     </>
   );
 };

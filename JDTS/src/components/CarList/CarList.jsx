@@ -3,6 +3,7 @@ import Modal from "../Modal/AppoinmentModal";
 import canter from "../../assets/canter.png";
 import elf from "../../assets/elf.png";
 import multicab from "../../assets/multicab.png";
+import minidump from "../../assets/minidump.png"
 
 const carList = [
   {
@@ -21,6 +22,12 @@ const carList = [
     name: "Multicab",
     image: multicab,
     description: "Engine Displacement: 660cc\n12 valve Horsepower: 38ps/3600rpm\nTransmission: Manual\n5 speed Engine Type - 4 stroke\n3 cylinder, water cooled-direct fan gasoline",
+    aosDelay: "1000",
+  },
+  {
+    name: " Mini Dump Truck",
+    image: minidump,
+    description: "Engine Type:	4 Cylinder, 4 cycle in-line, water coole\nTransmission Type: Manual\nBody Type:	Dump Truck\n6 speed Engine Type - 4 stroke\nDrive Type:	4x2",
     aosDelay: "1000",
   },
 ];

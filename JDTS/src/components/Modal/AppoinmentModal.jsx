@@ -226,7 +226,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
                     <option value="truck1">Elf cab</option>
                     <option value="truck2">Multicab</option>
                     <option value="truck3">Canter</option>
-                    <option value="truck4">Forward</option>     </select> 
+                    <option value="truck4">MIni Dump Truck</option>     </select> 
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2" htmlFor="message">

@@ -21,6 +21,11 @@ export const Navlinks = [
     name: "TRUCKS",
     link: "/#carlist-section",
   },
+  {
+    id: 4,
+    name: "CONTACT",
+    link: "/#contact",
+  },
 ];
 
 const Navbar = ({ theme, setTheme }) => {

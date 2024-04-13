@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import truckpng from "../../assets/truck.png";
-import truck from "../../assets/banner-car.png";
+import truck from "../../assets/hero.png";
 import AOS from "aos";
 
 const Hero = ({ theme }) => {

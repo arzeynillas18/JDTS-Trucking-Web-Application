@@ -23,38 +23,40 @@ const AdminLogin = () => {
     <div className="h-screen flex">
       <div className="w-full max-w-xl m-auto">
         {!isLoggedIn ? (
-          <div className="text-primary m-6">
+          <div className="m-6">
             <div className="flex items-center mt-3 justify-center">
-              <h1 className="text-3xl font-medium mt-4 mb-2">Admin</h1>
+              <h1 className="text-3xl font-medium mt-4 mb-2 text-black"> JDTS Admin</h1>
             </div>
-            <form>
-              <label className="text-left">Username:</label>
-              <input
-                name="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-                className="w-full p-3 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
-              />
-              <label>Password:</label>
-              <input
-                name="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                className="w-full p-3 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
-              />
-              <div className="flex items-center mt-3 justify-center">
-                <button
-                  className="bg-blue-700 hover:bg-blue-500 py-3 px-6 text-lg text-white rounded border focus:outline-none"
-                  onClick={handleLogin}
-                >
-                  Login
-                </button>
-              </div>
-            </form>
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <form>
+                <label className="text-left text-black">Username:</label>
+                <input
+                  name="username"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Username"
+                  className="w-full p-3 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
+                />
+                <label className="text-black">Password:</label>
+                <input
+                  name="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  className="w-full p-3 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
+                />
+                <div className="flex items-center mt-3 justify-center">
+                  <button
+                    className="bg-blue-700 hover:bg-blue-500 py-3 px-6 text-lg text-white rounded border focus:outline-none"
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         ) : null}
       </div>
