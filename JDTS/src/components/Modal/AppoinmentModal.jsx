@@ -79,7 +79,7 @@ const BookingModal = ({ showModal, setShowModal }) => {
         appointmentDate,
         appointmentTime,
         service,
-        truck, // Include truck in the submitted data
+        truck, 
         message,
       });
       console.log('Document written with ID: ', docRef.id);

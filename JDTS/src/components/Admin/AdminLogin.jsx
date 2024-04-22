@@ -20,16 +20,16 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="h-screen flex">
-      <div className="w-full max-w-xl m-auto">
+    <div className="h-screen flex bg-gray-200">
+      <div className="w-full max-w-md m-auto">
         {!isLoggedIn ? (
           <div className="m-6">
             <div className="flex items-center mt-3 justify-center">
-              <h1 className="text-3xl font-medium mt-4 mb-2 text-black"> JDTS Admin</h1>
+              <h1 className="text-3xl font-medium mt-4 mb-2 text-gray-900">JDTS Admin</h1>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6">
               <form>
-                <label className="text-left text-black">Username:</label>
+                <label className="text-left text-gray-900">Username:</label>
                 <input
                   name="username"
                   type="text"
@@ -38,7 +38,7 @@ const AdminLogin = () => {
                   placeholder="Username"
                   className="w-full p-3 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
                 />
-                <label className="text-black">Password:</label>
+                <label className="text-gray-900">Password:</label>
                 <input
                   name="password"
                   type="password"
@@ -49,7 +49,7 @@ const AdminLogin = () => {
                 />
                 <div className="flex items-center mt-3 justify-center">
                   <button
-                    className="bg-blue-700 hover:bg-blue-500 py-3 px-6 text-lg text-white rounded border focus:outline-none"
+                    className="bg-red-700 hover:bg-red-500 py-3 px-6 text-lg text-white rounded border focus:outline-none"
                     onClick={handleLogin}
                   >
                     Login

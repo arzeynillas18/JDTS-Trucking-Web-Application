@@ -16,10 +16,12 @@ const ContactModal = ({ showModal, closeModal }) => {
       .then((response) => {
         console.log('Email successfully sent!', response.status, response.text);
         setShowSuccessModal(true); // Show success modal on successful email send
+        console.log('showSuccessModal:', showSuccessModal); // Add this console log
         closeModal(); // Close the contact modal
       })
       .catch((error) => {
         console.error('Email sending failed:', error);
+        setShowSuccessModal(false); // Hide success modal in case of error
         // Handle error, e.g., show an error message
       })
       .finally(() => {
@@ -124,7 +126,8 @@ const ContactModal = ({ showModal, closeModal }) => {
           </div>
         </div>
       </div>
-      {showSuccessModal && <SuccessContactModal closeModal={handleSuccessModalClose} />} 
+      {showSuccessModal && <SuccessContactModal closeModal={handleSuccessModalClose} />}
+
     </>
   );
 };

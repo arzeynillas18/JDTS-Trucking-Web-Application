@@ -5,6 +5,8 @@ import { db } from "../../Firebase";
 const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const appointmentsPerPage = 10;
 
   useEffect(() => {
     const getAppointments = async () => {
@@ -26,7 +28,6 @@ const AdminDashboard = () => {
     window.location.href = "/admin";
   };
 
-  // Group appointments by date
   const groupedAppointments = {};
   appointments.forEach((appointment) => {
     if (!groupedAppointments[appointment.appointmentDate]) {
@@ -35,10 +36,15 @@ const AdminDashboard = () => {
     groupedAppointments[appointment.appointmentDate].push(appointment);
   });
 
-  // Filter appointments based on search query
   const filteredAppointments = appointments.filter((appointment) =>
-    appointment.name.toLowerCase().includes(searchQuery.toLowerCase())
+    appointment.name && appointment.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const indexOfLastAppointment = currentPage * appointmentsPerPage;
+  const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+  const currentAppointments = filteredAppointments.slice(indexOfFirstAppointment, indexOfLastAppointment);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="h-screen flex flex-col justify-center items-center bg-gray-100">
@@ -61,9 +67,9 @@ const AdminDashboard = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <h2 className="text-xl font-semibold">Bookings Appointment History</h2>
-          {Object.keys(groupedAppointments).map((date) => (
-            <div key={date}>
-              <h3 className="text-lg font-semibold mt-4">{date}</h3>
+          {currentAppointments.map((appointment) => (
+            <div key={appointment.id}>
+              <h3 className="text-lg font-semibold mt-4">{appointment.appointmentDate}</h3>
               <table className="w-full mt-2">
                 <thead>
                   <tr>
@@ -78,22 +84,31 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredAppointments.map((appointment) => (
-                    <tr key={appointment.id}>
-                      <td className="border px-4 py-2">{appointment.appointmentDate}</td>
-                      <td className="border px-4 py-2">{appointment.appointmentTime}</td>
-                      <td className="border px-4 py-2">{appointment.name}</td>
-                      <td className="border px-4 py-2">{appointment.email}</td>
-                      <td className="border px-4 py-2">{appointment.phone}</td>
-                      <td className="border px-4 py-2">{appointment.service}</td>
-                      <td className="border px-4 py-2">{appointment.truck}</td>
-                      <td className="border px-4 py-2">{appointment.message}</td>
-                    </tr>
-                  ))}
+                  <tr key={appointment.id}>
+                    <td className="border px-4 py-2">{appointment.appointmentDate}</td>
+                    <td className="border px-4 py-2">{appointment.appointmentTime}</td>
+                    <td className="border px-4 py-2">{appointment.name}</td>
+                    <td className="border px-4 py-2">{appointment.email}</td>
+                    <td className="border px-4 py-2">{appointment.phone}</td>
+                    <td className="border px-4 py-2">{appointment.service}</td>
+                    <td className="border px-4 py-2">{appointment.truck}</td>
+                    <td className="border px-4 py-2">{appointment.message}</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           ))}
+          <div className="flex justify-center mt-4">
+            {Array.from({ length: Math.ceil(filteredAppointments.length / appointmentsPerPage) }, (_, index) => (
+              <button
+                key={index}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 mx-1 rounded"
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
